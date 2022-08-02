@@ -1,6 +1,6 @@
 name: GIT SYNC
 
-on: [ push, delete ]
+on: [ push, delete, pull_request ]
 
 jobs:
   build:
@@ -13,4 +13,4 @@ jobs:
       - name: add remote
         run: git remote add mirror https://${{ secrets.ERDA_CLOUD_MIRROR_GIT_USERNAME }}:${{ secrets.ERDA_CLOUD_MIRROR_GIT_PASSWORD }}@erda.cloud/erda/dop/erda-project/erda
       - name: push
-        run: git push --tags --force --prune mirror "refs/remotes/origin/*:refs/heads/*"
+        run: git push --tags --force --prune mirror "refs/remotes/origin/*:refs/heads/*,refs/remotes/origin/*:refs/heads/pull/*"
