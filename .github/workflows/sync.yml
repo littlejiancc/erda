@@ -2,6 +2,7 @@ name: GIT SYNC
 
 on: [ push, delete ]
 
+
 jobs:
   build:
     if: github.repository == 'littlejiancc/erda'
