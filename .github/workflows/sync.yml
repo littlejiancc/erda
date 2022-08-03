@@ -12,10 +12,9 @@ jobs:
       - name: unshallow
         run: | 
           git fetch --unshallow origin
-          git fetch origin 'refs/pull/*/head:refs/remotes/origin/pr/*'
+          git fetch origin 'refs/pull/*/head:refs/remotes/origin/feature/pr/*'
       - name: add remote
         run: git remote add mirror https://${{ secrets.ERDA_CLOUD_MIRROR_GIT_USERNAME }}:${{ secrets.ERDA_CLOUD_MIRROR_GIT_PASSWORD }}@erda.daily.terminus.io/erda/dop/wxjcc/erda
       - name: push
         run: |
-          git push --tags --force mirror "refs/remotes/origin/*:refs/heads/*" 
-          git push --force --prune mirror "refs/remotes/origin/pr/*:refs/heads/feature/pr/*"
+          git push --tags --force --prune mirror "refs/remotes/origin/*:refs/heads/*" 
