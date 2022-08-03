@@ -16,4 +16,4 @@ jobs:
         run: git remote add mirror https://${{ secrets.ERDA_CLOUD_MIRROR_GIT_USERNAME }}:${{ secrets.ERDA_CLOUD_MIRROR_GIT_PASSWORD }}@erda.daily.terminus.io/erda/dop/wxjcc/erda
       - name: push
         run: |
-          git push --tags --force --prune mirror "refs/remotes/origin/*:refs/heads/*" 
+          git push --tags --force mirror "refs/remotes/origin/*:refs/heads/*" 
