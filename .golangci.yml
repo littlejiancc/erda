@@ -1,5 +1,5 @@
 run:
-  concurrency: 4
+  concurrency: 6
   timeout: 2m
   # include test files or not, default is true
   tests: false
