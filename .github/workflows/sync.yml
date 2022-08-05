@@ -15,7 +15,7 @@ jobs:
       - name: push
         run: git push --tags --force mirror "refs/remotes/origin/*:refs/heads/*"
   git-sync-pr:
-    if: github.repository == 'littlejiancc/erda' && (github.event_name == 'pull_request_target' ||  github.event_name == 'label') && contains(github.event.pull_request.labels.*.name, 'safe to sync')
+    if: github.repository == 'littlejiancc/erda' && (github.event_name == 'pull_request_target' ||  github.event_name == 'label') 
     runs-on: ubuntu-latest
     steps:
       - name: list open pull requests in last 24 hours
