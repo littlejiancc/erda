@@ -16,8 +16,10 @@ jobs:
           window: '240'
       - name: output
         run: |
-          echo '${{ steps.list.outputs.pullRequestNumbers }}'
-          for element in ${${{ steps.list.outputs.pullRequestNumbers }}[@]}
+          arr='${{ steps.list.outputs.pullRequestNumbers }}'
+          arr=${arr/[/(}
+          arr=${arr/]/)}
+          for element in ${arr[@]}
           do
           echo $element
           done
