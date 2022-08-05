@@ -14,16 +14,6 @@ jobs:
           token: ${{secrets.GITHUB_TOKEN}}
           state: 'open'
           window: '240'
-      - name: output
-        run: |
-          ss=${{ steps.list.outputs.pullRequestNumbers }}
-          ss=${ss:1:${#ss}-2}
-          echo $ss
-          IFS=', ' read -r -a arr <<< "$ss"
-          for element in ${arr[@]}
-          do
-          echo $element
-          done
       - uses: actions/checkout@v2
       - name: unshallow
         run: |
@@ -33,6 +23,7 @@ jobs:
           IFS=', ' read -r -a arr <<< "$ss"
           for id in ${arr[@]}
           do
+          echo $id
           git fetch origin 'refs/pull/$id/head:refs/remotes/origin/feature/pr/*'
           done
       - name: add remote
