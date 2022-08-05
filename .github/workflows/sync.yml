@@ -13,7 +13,7 @@ jobs:
         with:
           token: ${{secrets.GITHUB_TOKEN}}
           state: 'open'
-          window: '240'
+          window: '24'
       - uses: actions/checkout@v2
       - name: unshallow
         run: |
