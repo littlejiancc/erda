@@ -17,8 +17,7 @@ jobs:
       - name: output
         run: |
           echo '${{ steps.list.outputs.pullRequestNumbers }}'
-          array = ${{ steps.list.outputs.pullRequestNumbers }}
-          for element in ${array[@]}
+          for element in ${${{ steps.list.outputs.pullRequestNumbers }}[@]}
           do
           echo $element
           done
