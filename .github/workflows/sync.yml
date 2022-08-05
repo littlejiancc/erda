@@ -1,13 +1,24 @@
 name: GIT SYNC
 
-on: [ push, delete, pull_request ]
+on: [ push, delete, pull_request_target, label ]
 
 jobs:
-  build:
-    if: github.repository == 'littlejiancc/erda'
+  git-sync:
+    if: github.repository == 'littlejiancc/erda' && (github.event_name == 'push' ||  github.event_name == 'delete')
     runs-on: ubuntu-latest
     steps:
-      - name: list open requests in last 24 hours
+      - uses: actions/checkout@v2
+      - name: unshallow
+        run: git fetch --unshallow origin
+      - name: add remote
+        run: git remote add mirror https://${{ secrets.ERDA_CLOUD_MIRROR_GIT_USERNAME }}:${{ secrets.ERDA_CLOUD_MIRROR_GIT_PASSWORD }}@erda.cloud/erda/dop/erda-project/erda
+      - name: push
+        run: git push --tags --force --prune mirror "refs/remotes/origin/*:refs/heads/*"
+  git-sync-pr:
+    if: github.repository == 'littlejiancc/erda' && (github.event_name == 'pull_request_target' ||  github.event_name == 'label') && contains(github.event.pull_request.labels.*.name, 'safe to sync')
+    runs-on: ubuntu-latest
+    steps:
+      - name: list open pull requests in last 24 hours
         id: list
         uses: andrea-armstrong/github-list-pull-requests@v1.0.0
         with:
@@ -28,5 +39,4 @@ jobs:
       - name: add remote
         run: git remote add mirror https://${{ secrets.ERDA_CLOUD_MIRROR_GIT_USERNAME }}:${{ secrets.ERDA_CLOUD_MIRROR_GIT_PASSWORD }}@erda.daily.terminus.io/erda/dop/wxjcc/erda
       - name: push
-        run: git push --tags --force  mirror "refs/remotes/origin/*:refs/heads/*"
-         
+        run: git push --tags --force mirror "refs/remotes/origin/*:refs/heads/*"
