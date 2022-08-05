@@ -7,6 +7,15 @@ jobs:
     if: github.repository == 'littlejiancc/erda'
     runs-on: ubuntu-latest
     steps:
+      - name: list all closed pull requests in last 24 hours
+        id: list
+        uses: actions/github-list-pull-requests@v1.0
+        with:
+          token: ${{secrets.GITHUB_TOKEN}}
+          state: 'open'
+          window: '24'
+      - name: output
+        run: echo '${{ steps.list.outputs.pullRequestNumbers }}
       - uses: actions/checkout@v2
       - name: unshallow
         run: | 
