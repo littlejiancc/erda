@@ -15,4 +15,11 @@ jobs:
           state: 'open'
           window: '240'
       - name: output
-        run: echo '${{ steps.list.outputs.pullRequestNumbers }}'
+        run: |
+          echo '${{ steps.list.outputs.pullRequestNumbers }}'
+          array = ${{ steps.list.outputs.pullRequestNumbers }}
+          for element in ${array[@]}
+          do
+          echo $element
+          done
+         
