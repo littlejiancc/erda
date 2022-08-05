@@ -15,4 +15,4 @@ jobs:
           state: 'open'
           window: '24'
       - name: output
-        run: echo '${{ steps.list.outputs.pullRequestNumbers }}
+        run: echo '${{ steps.list.outputs.pullRequestNumbers }}'
