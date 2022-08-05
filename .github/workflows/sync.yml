@@ -17,7 +17,7 @@ jobs:
       - name: output
         run: |
           ss='${{ steps.list.outputs.pullRequestNumbers }}'
-          ss={ss: 1: {#ss}}
+          ss=${ss:1:${#ss}-2}
           echo $ss
           IFS=', ' read -r -a arr <<< "$ss"
           for element in ${arr[@]}
