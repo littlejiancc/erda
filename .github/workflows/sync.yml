@@ -16,7 +16,9 @@ jobs:
           window: '240'
       - name: output
         run: |
-          IFS=', ' read -r -a array <<< "$'${{ steps.list.outputs.pullRequestNumbers }}'"
+          ss='${{ steps.list.outputs.pullRequestNumbers }}'
+          echo $ss
+          IFS=', ' read -r -a array <<< "$ss"
           for element in ${arr[@]}
           do
           echo $element
