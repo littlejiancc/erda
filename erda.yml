@@ -3,7 +3,7 @@ meta:
   ERDA_COMPONENT: ""
 values:
   test:
-    request_cpu: 0.1
+    request_cpu: 0.2
     request_mem: 128
   production:
     nfs_root: "<%$.Storage.MountPoint%>"
